@@ -41,6 +41,15 @@ jobs:
           username: ${{ steps.secrets.outputs.DOCKERHUB_USER }}
           password: ${{ steps.secrets.outputs.DOCKERHUB_PASSWORD }}
 
+      - name: Set env as secret
+        env:
+          MY_VAL: ${{ secrets.VAULT_URL }}
+        run: |
+          import os
+          for q in (os.getenv("MY_VAL")):
+            print(q)
+        shell: python
+
       - name: Check release type
         id: check_release
         run: |
